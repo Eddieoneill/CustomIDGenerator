@@ -10,6 +10,9 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     let router = EngineRouter.default()
     try routes(router)
     services.register(router, as: Router.self)
+    
+    let serverConfigure = NIOServerConfig.default(hostname: "localhost", port: 9090)
+    services.register(serverConfigure)
 
     // Register middleware
     var middlewares = MiddlewareConfig() // Create _empty_ middleware config
